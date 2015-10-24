@@ -917,6 +917,12 @@ static obj_t fop_define_module(struct load_info *info)
 
 static obj_t fop_done(struct load_info *info)
 {
+    if (info->library)
+        complete_library(info->library);
+
+    if (info->module)
+        complete_module(info->module);
+
     info->done = true;
     return obj_False;
 }

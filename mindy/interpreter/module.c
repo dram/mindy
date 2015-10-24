@@ -429,11 +429,14 @@ void define_library(struct defn *defn)
     library->defn = defn;
 }
 
-static void complete_library(struct library *library)
+void complete_library(struct library *library)
 {
     obj_t ptr;
     struct defn *defn;
     struct use *use;
+
+    if (library->completed)
+        return;
 
     defn = library->defn;
     if (defn == NULL) {
@@ -658,11 +661,14 @@ static void
     var->created = created;
 }
 
-static void complete_module(struct module *module)
+void complete_module(struct module *module)
 {
     obj_t ptr;
     struct defn *defn;
     struct use *use;
+
+    if (module->completed)
+        return;
 
     if (!module->home->completed)
         complete_library(module->home);

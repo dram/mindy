@@ -69,11 +69,13 @@ struct defn {
 
 extern void define_library(struct defn *defn);
 extern struct library *find_library(obj_t name, bool createp);
+extern void complete_library(struct library *library);
 
 extern void define_module(struct library *library, struct defn *defn);
 extern struct module *find_module(struct library *library, obj_t name,
                                   bool lose_if_not_there,
                                   bool lose_if_imported);
+extern void complete_module(struct module *module);
 
 enum var_kind {
     var_Assumed, var_AssumedWriteable,
